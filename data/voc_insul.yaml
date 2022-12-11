@@ -1,0 +1,5 @@
+train: ./66KVimage/images/train
+val: ./66KVimage/images/val
+
+nc: 1
+names: ['Insulator']
