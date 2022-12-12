@@ -1,0 +1,5 @@
+train: /hpctmp/zwj/datasets/IDID/Train/yolo_images/images/train
+val: /hpctmp/zwj/datasets/IDID/Train/yolo_images/images/val
+
+nc: 5
+names: ["insulator-string-0-conditions-No-issues", "insulator-string-0-conditions-shell-Broken", 'insulator-string-1-conditions-None', "insulator-string-0-conditions-glaze-Flashover-damage", "insulator-string-0-conditions-notbroken-notflashed"]

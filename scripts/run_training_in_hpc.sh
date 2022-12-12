@@ -6,11 +6,12 @@
 #PBS -l select=1:ncpus=10:mem=32gb:ngpus=1
 #PBS -l walltime=12:00:00
 
-cd $PBS_o_WORKDIR;
-echo "Running on dir ${PBS_o_WORKDIR}";
+cd $PBS_O_WORKDIR;
+echo "Running on dir ${PBS_O_WORKDIR}";
 np=$(cat ${PBS_NODEFILE} | wc -l);
 
-image="/home/svu/zwj/SIF/cv-v0.1.sif"
-singularity exec -e $image bash << EOF > stdout.$PBS_JOBID 2> stderr.$PBS_JOBID
+image="/hpctmp/zwj/SIF/cv-v0.1.sif"
+find /hpctmp/zwj/ -type f -exec touch -am {} \;
+singularity exec -e $image bash << EOF > stdout.$PBS_JOBID.txt 2> stderr.$PBS_JOBID.txt
 ./scripts/run_training.sh
 EOF
