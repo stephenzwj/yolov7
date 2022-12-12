@@ -12,6 +12,6 @@ np=$(cat ${PBS_NODEFILE} | wc -l);
 
 image="/hpctmp/zwj/SIF/cv-v0.1.sif"
 find /hpctmp/zwj/ -type f -exec touch -am {} \;
-singularity exec -e $image bash << EOF > stdout.$PBS_JOBID.txt 2> stderr.$PBS_JOBID.txt
+singularity exec -e $image bash << EOF > hpc_outputs/out-$PBS_JOBID.txt
 ./scripts/run_training.sh
 EOF
