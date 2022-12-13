@@ -9,9 +9,6 @@
 cd $PBS_O_WORKDIR;
 echo "Running on dir ${PBS_O_WORKDIR}";
 np=$(cat ${PBS_NODEFILE} | wc -l);
-
-image="/hpctmp/zwj/SIF/cv-v0.1.sif"
 find /hpctmp/zwj/ -type f -exec touch -am {} \;
-singularity exec -e $image bash << EOF > hpc_outputs/out-$PBS_JOBID.txt
-./scripts/run_training.sh
-EOF
+image="/hpctmp/zwj/SIF/cv-v0.1.sif"
+singularity exec -e $image bash ./scripts/get_command_outputs.sh "./scripts/run_training.sh" > hpc_outputs/out-$PBS_JOBID.txt 2>&1;
