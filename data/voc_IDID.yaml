@@ -1,5 +1,5 @@
-train: /hpctmp/zwj/datasets/IDID/Train/yolo_images/images/train
-val: /hpctmp/zwj/datasets/IDID/Train/yolo_images/images/val
+train: /hpctmp/zwj/datasets/IDID/Train/yolo_dataset/images/train
+val: /hpctmp/zwj/datasets/IDID/Train/yolo_dataset/images/val
 
 nc: 4
 names: ['insu', "insu-shell-broken", 'insu-str', "insu-glaze-flashover"]

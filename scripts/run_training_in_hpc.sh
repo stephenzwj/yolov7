@@ -11,4 +11,6 @@ echo "Running on dir ${PBS_O_WORKDIR}";
 np=$(cat ${PBS_NODEFILE} | wc -l);
 find /hpctmp/zwj/ -type f -exec touch -am {} \;
 image="/hpctmp/zwj/SIF/cv-v0.1.sif"
-singularity exec -e $image bash ./scripts/get_command_outputs.sh "./scripts/run_training.sh" > hpc_outputs/out-$PBS_JOBID.txt 2>&1;
+num_gpus=$(nvidia-smi -L | wc -l)
+echo "Running with $num_gpus GPUs"
+singularity exec -e $image bash ./scripts/get_command_outputs.sh "./scripts/run_training.sh -d ${num_gpus}" > hpc_outputs/out-$PBS_JOBID.txt 2>&1;
