@@ -264,3 +264,4 @@ fabric.properties
 
 VOCdevkit/*
 66KVImage/*
+datasets/*
