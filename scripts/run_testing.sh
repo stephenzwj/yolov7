@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set default value for device_count if it is not provided
-device_count=''
+device_count='cpu'
 
 # Parse command-line arguments using getopts
 while getopts ":d:" opt; do
@@ -24,17 +24,22 @@ if [[ $device_count =~ ^[0-9]+$ ]]; then
   batch_size=$((32*$device_count))
 else
   # Set devices to device_count
-  devices="$device_count"
+  # if device_count is an empty string, it will be set to "cpu"
+  if [ "$device_count" == "" ]; then
+    devices="cpu"
+  else
+    devices="$device_count"
+  fi
   batch_size=32
 fi
 
-echo "Running with devices $devices and batch_size $batch_size"
+echo "Running tests with devices $devices and batch_size $batch_size"
 
-python train.py \
-    --weights weights/yolov7x_training.pt \
-    --cfg cfg/training/yolov7x_IDID.yaml \
+python test.py \
+    --weights runs/train/exp/weights/best.pt \
+    --task test \
     --data data/voc_IDID.yaml  \
     --device $devices \
-    --epochs 200 --batch-size $batch_size --img-size 640 \
-    --save_period 50\
-    --cache-images
+    --batch-size $batch_size --img-size 640 \
+    --conf 0.001 \
+    --iou 0.65

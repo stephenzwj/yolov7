@@ -27,14 +27,14 @@ else
   devices="$device_count"
   batch_size=32
 fi
-
 echo "Running with devices $devices and batch_size $batch_size"
 
 python train.py \
     --weights weights/yolov7x_training.pt \
     --cfg cfg/training/yolov7x_IDID.yaml \
     --data data/voc_IDID.yaml  \
-    --device $devices \
+    --device $device \
     --epochs 200 --batch-size $batch_size --img-size 640 \
     --save_period 50\
+    --nosave \
     --cache-images
